@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.UserMapper">
+    <select id="queryUserByUsername" resultType="com.zc.store.entity.User">
+        select *
+        from t_user
+        where username = #{username}
+    </select>
+    <!--
+        useGeneratedKeys:开启某个字段的值自增(主键设置为自增)
+        keyProperty:表示将表中的哪个字段作为主键
+    -->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="uid">
+        insert into t_user(username, password, salt, phone, email, gender, avatar, is_delete,
+                           created_user, created_time, modified_user, modified_time)
+        values (#{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar},
+                #{isDelete}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+    <!--修改用户密码-->
+    <update id="updateUserPassword">
+        update t_user
+        set password      = #{password},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        where username = #{username}
+    </update>
+
+    <!--根据id查询用户信息-->
+    <select id="findByid" resultType="com.zc.store.entity.User">
+        select *
+        from t_user
+        where uid = #{uid}
+    </select>
+    <!--修改用户的个人信息-->
+    <update id="updateUserInfo">
+        update t_user
+        set
+        <if test="phone != null and phone != ''">phone = #{phone},</if>
+        <if test="email != null and email != ''">email = #{email},</if>
+        <if test="gender != null and gender != ''">gender = #{gender},</if>
+        modified_user = #{modifiedUser},
+        modified_time = #{modifiedTime}
+        where uid = #{uid}
+    </update>
+
+    <!--修改头像-->
+    <update id="updateAvatarByUid">
+        update t_user
+        set avatar = #{avatar},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        where uid = #{uid}
+    </update>
+</mapper>

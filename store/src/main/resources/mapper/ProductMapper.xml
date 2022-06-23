@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.ProductMapper">
+
+    <!--
+        在商品表中查找热销商品
+        status是商品的状态，表示还有库存，可卖
+        priority是优先级，是商品的热销依据，卖的越多优先级越高
+        limit:只显示热销前4的商品
+    -->
+    <select id="selectHostGoods" resultType="com.zc.store.entity.Product">
+        select *
+        from t_product
+        where status = 1
+        order by priority desc limit 0,4
+    </select>
+
+    <select id="selectNewGoods" resultType="com.zc.store.entity.Product">
+        select *
+        from t_product
+        where status = 1
+        order by created_time desc limit 0,4
+    </select>
+
+    <select id="findById" resultType="com.zc.store.entity.Product">
+        select *
+        from t_product
+        where id = #{id}
+    </select>
+</mapper>

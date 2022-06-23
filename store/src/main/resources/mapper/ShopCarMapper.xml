@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.ShopCarMapper">
+
+    <!--将商品添加到购物车-->
+    <insert id="insertToShopCar" keyProperty="cid" useGeneratedKeys="true">
+        insert into t_cart (uid, pid, price, num, created_user, created_time, modified_user, modified_time)
+        values (#{uid}, #{pid}, #{price}, #{num}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+    <!-- 修改购物车数据中商品的数量：
+         Integer updateNumByCid(
+            @Param("cid") Integer cid,
+            @Param("num") Integer num,
+            @Param("modifiedUser") String modifiedUser,
+            @Param("modifiedTime") Date modifiedTime)
+    -->
+    <update id="updateNumByCid">
+        UPDATE
+            t_cart
+        SET num=#{num},
+            modified_user=#{modifiedUser},
+            modified_time=#{modifiedTime}
+        WHERE cid = #{cid}
+    </update>
+
+    <select id="findByUidAndPid" resultType="com.zc.store.entity.ShopCar">
+        select *
+        from t_cart
+        where uid = #{uid}
+          and pid = #{pid}
+    </select>
+
+    <!--
+        查询用户的购物车并显示在前端页面
+        购物车中的商品属性来自两张表，需要多表查询，主表是购物车表，使用左连接
+        连接条件是t_cart.pid = t_product.id
+    -->
+    <select id="findVOByUid" resultType="com.zc.store.vo.ShopCarVO">
+        select cid,
+               uid,
+               pid,
+               t_cart.price,
+               t_cart.num,
+               t_product.title,
+               t_product.price AS realPrice,
+               t_product.image
+        from t_cart
+                 left join t_product on t_cart.pid = t_product.id
+        where uid = #{uid}
+        order by t_cart.created_time desc
+    </select>
+
+    <!--根据cid查询购物车信息-->
+    <select id="findByCid" resultType="com.zc.store.entity.ShopCar">
+        select *
+        from t_cart
+        where cid = #{cid}
+    </select>
+
+    <!--
+        查询勾选的购物车信息
+        购物车中的商品属性来自两张表，需要多表查询，主表是购物车表，使用左连接
+        in关键字表示在in中的cid都可以是条件
+    -->
+    <select id="findVOByCid" resultType="com.zc.store.vo.ShopCarVO">
+        select cid,
+        uid,
+        pid,
+        t_cart.price,
+        t_cart.num,
+        t_product.title,
+        t_product.price AS realPrice,
+        t_product.image
+        from t_cart
+        left join t_product on t_cart.pid = t_product.id
+        where cid in(
+        <foreach collection="array" item="cid" separator=",">
+            #{cid}
+        </foreach>
+        )
+        order by t_cart.created_time desc
+    </select>
+
+    <delete id="deleteGood">
+        delete
+        from t_cart
+        where cid = #{cid}
+    </delete>
+
+    <delete id="deleteGoods">
+        delete
+        from t_cart
+        where cid in(
+        <foreach collection="array" item="cid" separator=",">
+            #{cid}
+        </foreach>
+        )
+    </delete>
+</mapper>

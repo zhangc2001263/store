@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.OrderMapper">
+
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
+        INSERT INTO t_order (uid, recv_name, recv_phone, recv_province, recv_city, recv_area, recv_address,
+                             total_price, status, order_time, pay_time, created_user, created_time, modified_user,
+                             modified_time)
+        VALUES (#{uid}, #{recvName}, #{recvPhone}, #{recvProvince}, #{recvCity}, #{recvArea},
+                #{recvAddress}, #{totalPrice}, #{status}, #{orderTime}, #{payTime}, #{createdUser},
+                #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+    <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_order_item (oid, pid, title, image, price, num, created_user,
+                                  created_time, modified_user, modified_time)
+        VALUES (#{oid}, #{pid}, #{title}, #{image}, #{price}, #{num}, #{createdUser},
+                #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+<!--    <select id="selectUserByOidAndUid" resultType="com.zc.store.entity.Order">-->
+<!--        select *-->
+<!--        from t_order-->
+<!--        where uid = #{uid}-->
+<!--    </select>-->
+
+    <select id="selectOrderItem" resultType="com.zc.store.entity.OrderItem">
+        select *
+        from t_order_item
+        where created_user = #{username}
+    </select>
+
+    <select id="seleteStatus" resultType="com.zc.store.entity.OrderItem">
+        select *
+        from t_order_item
+        where id = #{id}
+    </select>
+
+    <delete id="deleteOrderItem">
+        delete
+        from t_order_item
+        where id = #{id}
+    </delete>
+</mapper>

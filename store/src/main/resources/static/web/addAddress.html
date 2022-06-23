@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--edge浏览器H5兼容设置-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--360浏览器H5兼容设置-->
+    <meta name="renderer" content="webkit"/>
+    <title>电脑商城</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--导入核心文件-->
+    <script src="../bootstrap3/js/holder.js"></script>
+    <link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/top.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/footer.css"/>
+    <!--<script type="text/javascript" src="../js/distpicker.data.js"></script>-->
+    <!--<script type="text/javascript" src="../js/distpicker.js"></script>-->
+</head>
+
+<body>
+<!--头部-->
+<header class="header">
+    <!--电脑商城logo-->
+    <div class="row">
+        <div class="col-md-3">
+            <a href="index.html">
+                <img src="../images/index/stumalllogo.png"/>
+            </a>
+        </div>
+        <!--快捷选项-->
+        <div class="col-md-9 top-item">
+            <ul class="list-inline pull-right">
+                <li><a href="favorites.html"><span class="fa fa-heart"></span>&nbsp;收藏</a></li>
+                <li class="li-split">|</li>
+                <li><a href="orders.html"><span class="fa fa-file-text"></span>&nbsp;订单</a></li>
+                <li class="li-split">|</li>
+                <li><a href="cart.html"><span class="fa fa-cart-plus"></span>&nbsp;购物车</a></li>
+                <li class="li-split">|</li>
+                <li>
+                    <!--下列列表按钮 ：管理-->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                            <span id="top-dropdown-btn"><span class="fa fa-gears"></span>&nbsp;管理 <span
+                                    class="caret"></span></span>
+                        </button>
+                        <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                            <li><a href="password.html">修改密码</a></li>
+                            <li><a href="userdata.html">个人资料</a></li>
+                            <li><a href="upload.html">上传头像</a></li>
+                            <li><a href="address.html">收货管理 </a></li>
+                            <li><a href="/users/exit">退出账号</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="li-split">|</li>
+                <li><span class="fa fa-user"></span></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!--导航 -->
+<!--分割导航和顶部-->
+<div class="row top-nav">
+    <div class="col-md-6">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="#"></a>
+            </li>
+            <li class="active"><a href="index.html"><span class="fa fa-home"></span></a></li>
+
+        </ul>
+    </div>
+    
+</div>
+<!--头部结束-->
+<!--导航结束-->
+<div class="container">
+    <div class="col-md-2">
+        <!--左侧导航开始-->
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <!--主选项：我的订单-->
+                    <p class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">我的订单</a>
+                    </p>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div><a href="orders.html">全部订单</a></div>
+                        <div><a href="orders.html">待付款</a></div>
+                        <div><a href="orders.html">待收货</a></div>
+                        <div><a href="orders.html">待评价</a></div>
+                        <div><a href="orders.html">退货退款</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <!--主选项：资料修改-->
+                    <p class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">资料修改</a>
+                    </p>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div><a href="password.html">修改密码</a></div>
+                        <div><a href="userdata.html">个人资料</a></div>
+                        <div><a href="upload.html">上传头像</a></div>
+                        <div><a href="address.html"><b>收货管理</b></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--左侧导航结束-->
+    </div>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <ul class="nav nav-tabs">
+                <li><a href="password.html">修改密码</a></li>
+                <li><a href="userdata.html">个人资料</a></li>
+                <li><a href="upload.html">上传头像</a></li>
+                <li class="active"><a href="#">收货管理</a></li>
+            </ul>
+            <div class="panel-body">
+                <!--新增收货地址表单开始-->
+                <form id="form-add-new-address" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"><span class="txtred">*</span>收货人：</label>
+                        <div class="col-md-8">
+                            <input name="name" type="text" class="form-control" placeholder="请输入收货人姓名">
+                        </div>
+                    </div>
+                    <div class="address_content" data-toggle="distpicker">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span class="txtred">*</span>省/直辖市：</label>
+                            <div class="col-md-3">
+                                <select id="province-list" name="provinceCode" class="form-control"
+                                        data-province="---- 选择省 ----"></select>
+                            </div>
+                            <label class="col-md-2 control-label"><span class="txtred">*</span>城市：</label>
+                            <div class="col-md-3">
+                                <select id="city-list" name="cityCode" class="form-control"
+                                        data-city="---- 选择市 ----"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span class="txtred">*</span>区县：</label>
+                            <div class="col-md-3">
+                                <select id="area-list" name="areaCode" class="form-control"
+                                        data-district="---- 选择区 ----"></select>
+                            </div>
+                            <label class="col-md-2 control-label">邮政编码：</label>
+                            <div class="col-md-3">
+                                <input name="zip" type="text" class="form-control" placeholder="请输入6位邮政编码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"><span class="txtred">*</span>详细地址：</label>
+                        <div class="col-md-8">
+                            <textarea name="address" class="form-control" rows="3"
+                                      placeholder="输入详细的收货地址，小区名称、门牌号等"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"><span class="txtred">*</span>手机：</label>
+                        <div class="col-md-3">
+                            <input name="phone" type="text" class="form-control" placeholder="请输入手机号码">
+                        </div>
+                        <label class="col-md-2 control-label">固话：</label>
+                        <div class="col-md-3">
+                            <input name="tel" type="text" class="form-control" placeholder="请输入固定电话号码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">地址类型：</label>
+                        <div class="col-md-8">
+                            <input name="tag" type="text" class="form-control" placeholder="请输入地址类型，如：家、公司或者学校">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"><a href="address.html">返回</a>&nbsp;&nbsp;&nbsp;</label>
+                        <div class="col-sm-10">
+                            <input id="btn-add-new-address" type="button" class="col-md-1 btn btn-primary" value="保存"/>
+                            <input type="reset" class="col-md-offset-1 col-md-1 btn btn-primary" value="重置"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--页脚开始-->
+<div class="clearfix"></div>
+<footer class="footer">
+    <!-- 品质保障，私人定制等-->
+    <div class="text-center rights container">
+        <div class="col-md-offset-2 col-md-2">
+            <span class="fa fa-thumbs-o-up"></span>
+            <p>品质保障</p>
+        </div>
+        <div class="col-md-2">
+            <span class="fa fa-address-card-o"></span>
+            <p>私人订制</p>
+        </div>
+        <div class="col-md-2">
+            <span class="fa fa-graduation-cap"></span>
+            <p>学生特供</p>
+        </div>
+        <div class="col-md-2">
+            <span class="fa fa-bitcoin"></span>
+            <p>专属特权</p>
+        </div>
+    </div>
+    <!--联系我们、下载客户端等-->
+    <div class="container beforeBottom">
+        <div class="col-md-offset-1 col-md-3">
+            <div><img src="../images/index/stumalllogo.png" alt="" class="footLogo"/></div>
+            <div><img src="../images/index/footerFont.png" alt=""/></div>
+        </div>
+        <div class="col-md-4 callus text-center">
+            <div class="col-md-4">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <p>买家帮助</p>
+                        </a>
+                    </li>
+                    <li><a href="#">新手指南</a></li>
+                    <li><a href="#">服务保障</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <p>商家帮助</p>
+                        </a>
+                    </li>
+                    <li><a href="#">商家入驻</a></li>
+                    <li><a href="#">商家后台</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <p>关于我们</p>
+                        </a>
+                    </li>
+                    <li><a href="#">关于圆心</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li>
+                        <span class="fa fa-wechat"></span>
+                        <span class="fa fa-weibo"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-5">
+                <p>电脑商城客户端</p>
+                <img src="../images/index/ios.png" class="lf">
+                <img src="../images/index/android.png" alt="" class="lf"/>
+            </div>
+            <div class="col-md-6">
+                <img src="../images/index/erweima.png">
+            </div>
+        </div>
+    </div>
+    <!-- 页面底部-备案号 #footer -->
+    <div class="col-md-12 text-center bottom">
+        Copyright © 2022 dnsc.cn All Rights Reserved 京ICP备08963888号-45 <a target="_blank" href="http://www.dnsc.cn/">圆心科技集团有限公司</a>
+        版权所有
+    </div>
+</footer>
+<!--页脚结束-->
+<script type="text/javascript">
+    //value属性用作当前这个区域的code值
+    let defaultOption = "<option value='0'>---- 请选择 ----</option>";
+    $(function () {
+        showProviceList();
+        //为市和区的下拉列表设置默认值为---- 请选择 ----
+        $("#province-list").append(defaultOption);
+        $("#city-list").append(defaultOption);
+        $("#area-list").append(defaultOption);
+    });
+
+    /**
+     * change()方法用于监听某个空间是否发生改变，一旦发生改变就会触发参数的函数
+     */
+    $("#province-list").change(function () {
+        //获取省/直辖市的代号
+        let parent = $("#province-list").val();
+        //先清空上一次选择省/直辖市时市和区的下拉列表
+        $("#city-list").empty();
+        $("#area-list").empty();
+        //然后再填充上下拉列表的默认值
+        $("#city-list").append(defaultOption);
+        $("#area-list").append(defaultOption);
+        $.ajax({
+            url: "/district",
+            type: "get",
+            data: "parent=" + parent,
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    for (let i = 0; i < list.length; i++) {
+                        let opt = "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#city-list").append(opt);
+                    }
+                } else {
+                    alert("城市信息加载失败");
+                }
+            }
+        })
+    })
+
+    $("#city-list").change(function () {
+        //获取省/直辖市的代号
+        let parent = $("#city-list").val();
+        //先清空上一次选择省/直辖市时市和区的下拉列表
+        $("#area-list").empty();
+        //然后再填充上下拉列表的默认值
+        $("#area-list").append(defaultOption);
+        $.ajax({
+            url: "/district",
+            type: "get",
+            data: "parent=" + parent,
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    for (let i = 0; i < list.length; i++) {
+                        let opt = "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#area-list").append(opt);
+                    }
+                } else {
+                    alert("区县信息加载失败");
+                }
+            }
+        })
+    })
+
+    function showProviceList() {
+        $.ajax({
+            url: "/district",
+            type: "post",
+            data: "parent=86",
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    let list = json.data;
+                    for (let i = 0; i < list.length; i++) {
+                        let opt = "<option value='" + list[i].code + "'>" + list[i].name + "</option>";
+                        $("#province-list").append(opt);
+                    }
+                } else {
+                    alert("省/直辖市信息加载失败");
+                }
+            }
+        })
+    }
+
+    $("#btn-add-new-address").click(function () {
+        $.ajax({
+            url: "/address/addnewaddress",
+            type: "post",
+            data: $("#form-add-new-address").serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.state == 200) {
+                    alert("新增收货地址成功");
+                    location.href = "address.html";
+                } else {
+                    alert("新增收货地址失败");
+                }
+            },
+            error: function (xhr) {
+                alert("新增地址时发生未知错误" + xhr.status)
+            }
+        })
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.AdderssMapper">
+
+    <!--新增收货地址-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="aid">
+        insert into t_address (uid, name, province_name, province_code, city_name, city_code, area_name, area_code, zip,
+                               address, phone, tel, tag, is_default, created_user, created_time, modified_user,
+                               modified_time)
+        values (#{uid}, #{name}, #{provinceName}, #{provinceCode}, #{cityName}, #{cityCode}, #{areaName},
+                #{areaCode}, #{zip}, #{address}, #{phone}, #{tel}, #{tag}, #{isDefault}, #{createdUser},
+                #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+    <!--根据uid查询用户收货地址的信息条数-->
+    <select id="countByUid" resultType="java.lang.Integer">
+        select count(*)
+        from t_address
+        where uid = #{uid}
+    </select>
+
+    <!--查询目标用户的所有收货地址，根据是否为默认值降序和创建时间降序排序-->
+    <select id="findInfoByUid" resultType="com.zc.store.entity.Address">
+        select *
+        from t_address
+        where uid = #{uid}
+        order by is_default desc, created_time desc
+    </select>
+
+    <!--根据aid查询收货地址-->
+    <select id="findByAid" resultType="com.zc.store.entity.Address">
+        select *
+        from t_address
+        where aid = #{aid}
+    </select>
+
+    <!--将所有is_default先设置为0，不是默认收货地址-->
+    <update id="updateNonDefault">
+        update t_address
+        set is_default = 0
+        where uid = #{uid}
+    </update>
+
+    <!--将目标地址is_default设置为1,设置为默认收货地址-->
+    <update id="updateDefaultByAid">
+        update t_address
+        set is_default    = 1,
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        where aid = #{aid}
+    </update>
+
+    <!--根据aid删除一条收货地址-->
+    <delete id="deleteAddressByAid">
+        delete
+        from t_address
+        where aid = #{aid}
+    </delete>
+
+    <!--
+        查出当前用户的所有收货地址，按照修改时间降序排序，第一条就是最新修改的，如果删除的是默认收货地址这条地址就上升为默认，
+        limit分页，从第一个(下标为0)开始找出一个，就是找出第一条地址数据
+    -->
+    <select id="findLastModified" resultType="com.zc.store.entity.Address">
+        select *
+        from t_address
+        where uid = #{uid}
+        order by modified_time desc limit 0,1
+    </select>
+
+    <select id="findIsDefault" resultType="com.zc.store.entity.Address">
+        select *
+        from t_address
+        where uid = #{uid} and is_default = 1
+    </select>
+</mapper>

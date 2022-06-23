@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.store.mapper.FavoriteMapper">
+
+    <insert id="insertFavorite" useGeneratedKeys="true" keyProperty="fid">
+        insert into t_favorites (uid, pid, price, title,
+                                 image, create_user, create_time)
+        values (#{uid}, #{pid}, #{price}, #{title}, #{image},
+                #{createUser}, #{createTime})
+    </insert>
+
+    <select id="selectFavorites" resultType="com.zc.store.entity.Favorite">
+        select *
+        from t_favorites
+        where uid = #{uid}
+    </select>
+
+    <delete id="deleteFavorites">
+        delete
+        from t_favorites
+        where fid = #{fid}
+    </delete>
+</mapper>
